@@ -38,14 +38,14 @@ private static final Map<String, String> convertMap = new HashMap<String, String
     @SubscribeEvent
     public static void ConvertChatCodeToColor(ServerChatEvent event){
         if (!event.getPlayer().level.isClientSide){
-            event.setComponent(FormatText(event.getMessage()));
+            event.setComponent(FormatText(event.getComponent()));
         }
     }
 
-    private static TextComponent FormatText(String text){
-        String returnText = text;
+    private static TextComponent FormatText(ITextComponent component){
+        String returnText = component.getString();
         for (Map.Entry<String, String> entry : convertMap.entrySet()){
-            if (text.indexOf(entry.getKey()) != -1){
+            if (component.getString().indexOf(entry.getKey()) != -1){
                 returnText = returnText.replace(entry.getKey(), entry.getValue());
             }
         }
